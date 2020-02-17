@@ -111,8 +111,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.button8 -> textView.text = "여덟번째 버튼을 눌렀습니다."
             }
         }
-        button7.setOnClickListener ( lisnter4 )
-        button8.setOnClickListener ( lisnter4)
+        button7.setOnClickListener (lisnter4)
+        button8.setOnClickListener (lisnter4)
 
 
     }
@@ -138,6 +138,98 @@ class MainActivity : AppCompatActivity() {
                 R.id.button4 -> {
                     textView.text = "네 번째 버튼을 눌렀습니다."
                 }
+            }
+        }
+    }
+
+}
+
+</code>
+</pre>
+
+### CheckBox
+
+1. 항목을 제공하고 체크를 통해 선택할 수 있도록 하는 뷰
+2. text : CheckBox에 표시되는 문자열을 설정한다.
+3. checked : 체크상태를 표시 true or false
+4. isCheck : 프로퍼티 체그 상태를 확인 할 수 있다.
+5. toggle : !주요 메서드 - 현재 체크상태를 변경한다.
+
+<pre>
+<code>
+package com.geoniljang.checkbox
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.CompoundButton
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        button.setOnClickListener { view ->
+            textView.text = ""
+            if (checkBox.isChecked == true) {
+                textView.append("첫 번째 체크 박스 체크 되었습니다.\n")
+            }
+            if (checkBox2.isChecked == true) {
+                textView.append("두 번째 체크 박스 체크 되었습니다. \n")
+            }
+            if (checkBox3.isChecked == true) {
+                textView.append("세 번째 체크 박스 체크 되었습니다. \n")
+            }
+        }
+
+        button2.setOnClickListener { view ->
+            checkBox.isChecked = true
+            checkBox2.isChecked = true
+            checkBox3.isChecked = true
+        }
+
+        button3.setOnClickListener { view ->
+            checkBox.isChecked = false
+            checkBox2.isChecked = false
+            checkBox3.isChecked = false
+        }
+
+        toggleButton.setOnClickListener { view ->
+            checkBox3.toggle()
+            checkBox.toggle()
+            checkBox2.toggle()
+        }
+
+        val listener1 = CheckBoxListener()
+        checkBox.setOnCheckedChangeListener(listener1)
+
+
+
+        checkBox2.setOnCheckedChangeListener { target, isChecked ->
+            if (isChecked) {
+                textView.text = "이벤트 : 체크박스 2가 체크 되었습니다."
+            } else {
+                textView.text = "이벤트 : 체크박스 2가 체크 해제 되었습니다."
+            }
+        }
+
+        checkBox3.setOnCheckedChangeListener{taget, isChecked ->
+            if(isChecked){
+                textView.text = "이벤트 : 체크 박스3이 체크 되었습니다."
+            }else{
+                textView.text = "이벤트 : 체크 박스3이 체크 해제되었습니다."
+            }
+        }
+
+    }
+
+    inner class CheckBoxListener : CompoundButton.OnCheckedChangeListener {
+        override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+            if (isChecked == true) {
+                textView.text = "이벤트 : 체크박스1이 체크되었습니다."
+            } else {
+                textView.text = "이벤트 : 체크박스1이 체크 해제 되었습니다."
             }
         }
     }
