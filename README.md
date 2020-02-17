@@ -77,3 +77,72 @@
 1. 사용자가 누르면 개발자가 작성한 코드가 동작하는 뷰
 2. OnClickListener : 사용자가 버튼을 눌렀을 때 반응하는 리스너
 3. 람다식을 사용한 개발을 아주 좋아 합니다.
+   <pre>
+   <code>
+   package com.geoniljang.buttontutorial
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import kotlinx.android.synthetic.main.activity_main.\*
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val listener1 = BtnListener()
+        button.setOnClickListener(listener1)
+
+        val listener2 = BtnListener2()
+        button2.setOnClickListener(listener2)
+
+        var listener3 = BtnLisnter3()
+        button3.setOnClickListener(listener3)
+        button4.setOnClickListener(listener3)
+
+        button4.setOnClickListener { view -> textView.text = " 네 번째 버튼을 눌렀습니다." }
+        button5.setOnClickListener { view -> textView.text = "다 섯 번쨰 버튼을 눌렀습니다." }
+
+        val lisnter4 = View.OnClickListener { view ->
+            when(view.id){
+                R.id.button7 -> textView.text = "일곱번째 버튼을 눌렀습니다."
+                R.id.button8 -> textView.text = "여덟번째 버튼을 눌렀습니다."
+            }
+        }
+        button7.setOnClickListener ( lisnter4 )
+        button8.setOnClickListener ( lisnter4)
+
+
+    }
+
+    inner class BtnListener : View.OnClickListener {
+        override fun onClick(v: View?) {
+            textView.text = "첫 번째 버튼을 눌렀습니다."
+        }
+    }
+
+    inner class BtnListener2 : View.OnClickListener {
+        override fun onClick(v: View?) {
+            textView.text = "두 번째 버튼을 눌렀습니다."
+        }
+    }
+
+    inner class BtnLisnter3 : View.OnClickListener {
+        override fun onClick(v: View?) {
+            when (v?.id) {
+                R.id.button3 -> {
+                    textView.text = "세 번째 버튼을 눌렀습니다."
+                }
+                R.id.button4 -> {
+                    textView.text = "네 번째 버튼을 눌렀습니다."
+                }
+            }
+        }
+    }
+
+}
+
+</code>
+</pre>
