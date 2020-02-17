@@ -77,9 +77,10 @@
 1. 사용자가 누르면 개발자가 작성한 코드가 동작하는 뷰
 2. OnClickListener : 사용자가 버튼을 눌렀을 때 반응하는 리스너
 3. 람다식을 사용한 개발을 아주 좋아 합니다.
-   <pre>
-   <code>
-   package com.geoniljang.buttontutorial
+
+<pre>
+<code>
+package com.geoniljang.buttontutorial
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -142,7 +143,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-}
 
 </code>
 </pre>
@@ -234,6 +234,85 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+}
+
+</code>
+</pre>
+
+### 라디오 버튼
+
+1. 하나의 그룹 안에서 하나만 선택 할 수 있도록 하는 뷰
+2. text: Radio Button에 표시되는 문자열을 설정한다.;
+3. checked : 체크 상태를 설정한다. 라디오 버튼은 그룹 내에서 하나는 반드시 선택되어 있도록 제공하므로 반드시 하나는 체크를 해줘야 한다.
+4. isChecked : Radio Button의 check상태 (true / false). 같은 그룹내 Radio Button 중 하나만 체크될 수 있다.
+5. OnCheckedChangeListener : !주요 리스너 - 체크 상태가 변경되었을 때 반응하는 리스너
+
+<pre>
+<code>
+package com.geoniljang.radiotutorial
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.widget.RadioGroup
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        button.setOnClickListener { view ->
+            when(group1.checkedRadioButtonId){
+                R.id.radioButton -> textView.text = "라디오 1번 선택 되었습니다."
+                R.id.radioButton2 -> textView.text = "라디오 2번 선택 되었습니다."
+                R.id.radioButton3 -> textView.text = "라디오 3번 선택 되었습니다."
+            }
+
+            when(group2.checkedRadioButtonId){
+                R.id.radioButton4 -> {textView3.text = "라이오 4번 선택 되었습니다."}
+                R.id.radioButton5 -> {textView3.text = "라이오 6번 선택 되었습니다."}
+                R.id.radioButton6 -> {textView3.text = "라이오 5번 선택 되었습니다."}
+
+            }
+        }
+
+//        val listener = RadioListener()
+//        group1.setOnCheckedChangeListener(listener)
+//        group2.setOnCheckedChangeListener(listener)
+
+        group1.setOnCheckedChangeListener{group: RadioGroup?, checkedId: Int ->
+            when(checkedId){
+                R.id.radioButton -> textView.text = "체크 이벤트 : 1 클릭"
+                R.id.radioButton2 -> textView.text = "체크 이벤트 : 2 클릭"
+                R.id.radioButton3 -> textView.text = "체크 이벤트 : 3 클릭"
+            }
+        }
+
+
+    }
+
+    inner class RadioListener: RadioGroup.OnCheckedChangeListener{
+        override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
+            when(group?.id){
+                R.id.group1 -> {
+                    when(checkedId){
+                        R.id.radioButton -> textView.text = "체크 이벤트 : 1 클릭"
+                        R.id.radioButton2 -> textView.text = "체크 이벤트 : 2 클릭"
+                        R.id.radioButton3 -> textView.text = "체크 이벤트 : 3 클릭"
+                    }
+                }
+                R.id.group2 -> {
+                    when(checkedId){
+                        R.id.radioButton4 -> textView.text ="체크 이벤트 : 4클릭"
+                        R.id.radioButton5 -> textView.text ="체크 이벤트 : 5클릭"
+                        R.id.radioButton6 -> textView.text ="체크 이벤트 : 6클릭"
+                    }
+                }
+
+            }
+        }
+    }
 }
 
 </code>
