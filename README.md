@@ -1,5 +1,66 @@
 # Basic Android
 
+# 0. 람다
+
+1. 해당 뷰 클래스 오버라이딩 해야 하는 메서드가 1개 라면 사용가능
+   - 특정 기능만 딱! 만들고자 한다면 람다를 사용해서 처리하는 것이 좋으나, 동일한 동작을 다른 뷰에서도 사용하고자 한다면 클래스로 만들어서 사용하는 것이 좋다. "의견"
+
+<pre>
+<code>
+   button.seOnClickListener{ view -> 
+      // 클릭시 발생시킬 무언가
+      textView.text = "Hello, You clicked button."
+   }
+</code>
+</pre>
+
+2. 2개 이상이이라면 중첩 익명 클래스 사용가능
+   - 특정 기능만 딱! 만들고자 한다면 람다를 사용하면 좋으나, 오버라이팅 해야 하는 함수가 2개 이상이라면 다음과 같이 익명 중첩 클래스를 사용하면 기능을 구현 할 수 있다.
+   - 그러나 이렇게 할 것 이라면 클래스로 분리해 두는 것도 나빠 보이지는 않는다. 그런데 딱 그 뷰는 "특정 동작"을 하게 할 것이라면 이 방법이 좋아 보인다 "의견 - 람다와 사용 시기 동일 하다면"
+
+<pre>
+<code>
+   //
+
+   editText.addTextChangedListener(object : TextWatcher{
+      override fun onTextChanged(s: CharSequence?, start : Int , before: Int, count: Int){
+         textView.text = s 
+      }
+      override fun afterTextChanged(s: Editable?) {}
+
+      override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}  
+
+   })
+</code>
+</pre>
+
+3. 기본적으로는 중첩 클래스 사용하여 메서드 오버라이딩 가능
+
+   - 여러 뷰에서 동일한 기능을 수행 하게 만들고자 한다면, 클래스로 만들어서 이벤트를 등록 하는 방식이 좋다.
+
+<pre>
+<code>
+   
+
+   var listener3 = BtnLisnter3()
+   button3.setOnClickListener(listener3) // 다음과 같이 클래스로 만든 이벤트를 등록해준다?
+   button4.setOnClickListener(listener3)
+
+   inner class BtnLisnter3 : View.OnClickListener {
+        override fun onClick(v: View?) {
+            when (v?.id) {
+                R.id.button3 -> {
+                    textView.text = "세 번째 버튼을 눌렀습니다."
+                }
+                R.id.button4 -> {
+                    textView.text = "네 번째 버튼을 눌렀습니다."
+                }
+            }
+        }
+    }
+</code>
+</pre>
+
 # 1. 안드로이드
 
 1. Android Runtime (ART)
@@ -313,6 +374,173 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+}
+
+</code>
+</pre>
+
+### ProgressBar
+
+1. 프로그램이 진행 되는 상황을 표현 하기위해서 사용합니다.
+2. style : ProgressBar의 모양을 설정한다.
+3. max : 최대 값
+4. progress : 현재 값
+5. max : 총 량
+6. progress : 진행향
+7. incrementProgressBy : 지정된 값 만큼 증가 혹은 감소 시킨다.
+
+<pre>
+<code>
+package com.geoniljang.progressbar
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        button.setOnClickListener { view ->
+            progressBar4.incrementProgressBy(5)
+        }
+        button2.setOnClickListener { view ->
+            progressBar4.incrementProgressBy(-5)
+        }
+
+    }
+}
+
+</code>
+</pre>
+
+### SeekBar
+
+1. ProgreeBar와 매우 유사하지만 사용자가 값을 직접 설정할 수 있는 기능을 갖추고 있다.
+2. style : SeekBar의 모양을 설정한다.
+3. max : 최대 값
+4. progress : 현재 값
+5. incrementProgressBy : 지정된 값 만큼 증가 혹은 감소시킨다
+6. OnSeekBarChangeListener : SeekBar의 값이 변경되었 때 반응하는 리스너
+7. 익명 중첩 클래스
+
+<pre>
+<code>
+package com.geoniljang.progressbar
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        button.setOnClickListener { view ->
+            progressBar4.incrementProgressBy(5)
+        }
+        button2.setOnClickListener { view ->
+            progressBar4.incrementProgressBy(-5)
+        }
+
+    }
+}
+
+</code>
+</pre>
+
+### EditText
+
+1. 사용자에게 문자열을 입력 받는 용도로 사용하는 뷰
+2. inputType : 입력받을 데이터 타입을 선택 할 수 있다.
+3. hint : 안내 문구를 설정한다.
+4. text : 처음 보여질 때 나타날 문자열을 설정 한다.
+5. imeOptions: 키보드 엔터키의 형태를 설정한다.
+6. setText : EditText에 문자열을 설정한다.
+7. OnEditorActionListener : 엔커 키를 누르면 반응하는 리스너
+8. TextWatcher : 입력을 할 때 마다 반응하는 리스너.
+
+<pre>
+<code>
+package com.geoniljang.edittext
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.KeyEvent
+import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        button.setOnClickListener { view ->
+            textView.text = editText.text
+        }
+
+        button3.setOnClickListener { view ->
+            editText.setText("")
+        }
+
+//        val listener1 = EditorListener()
+//        editText.setOnEditorActionListener(listener1)
+
+        editText.setOnEditorActionListener { v, actionId, event ->
+            println(v)
+            textView.text = editText.text
+            false
+        }
+
+//        val watcher = EditWatcher()
+//        editText.addTextChangedListener(watcher)
+
+        //익명 중첩 클래스
+        editText.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                textView.text = s
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
+    }
+
+
+//    inner class EditorListener: TextView.OnEditorActionListener{
+//        override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+//            textView.text = editText.text
+//            return false
+//        }
+//    }
+
+    inner class EditWatcher:TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            textView.text = s
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+    }
+
 }
 
 </code>
