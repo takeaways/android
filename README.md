@@ -545,3 +545,8 @@ class MainActivity : AppCompatActivity() {
 
 </code>
 </pre>
+
+### ImageView
+
+1. src : 보여줄 이미지를 지정하는 속성
+2. srcCompat : svg, 등 벡터 방식 이미지 사용시
