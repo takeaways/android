@@ -611,6 +611,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     in 60 ..[or until] 80 = 60이상 80 미만
+    val a6 = Array(10, {0}) //lambda
+    val a7 = Array(4, {1;2;4;2})
     
 </code>
 </pre>
@@ -647,5 +649,49 @@ class MainActivity : AppCompatActivity() {
     val aDouble = doubleArrayOf(2.3, 123.23,424.42)
 
 
+</code>
+</pre>
+
+### Collection
+
+1. list
+2. set
+3. map
+
+<pre>
+<code>
+    fun main(agrs: Array<String>){
+
+        << Imutable 변경불가능 >> 
+        // List
+        val numberList = listOf<Int>(1,2,3,2,3)
+        println(numberList)// 1,2,3,2,3 -> 중봅을 허용한다.
+        println(numberList.get(0))
+        println(numberList[0])
+
+
+        val numberList1 = mutableListOf<Int>(1,2,3)
+
+
+        << Imutable 변경불가능 >>
+        // Set 
+        val numberSet = setOf<Int>(1,2,3,1,3,)
+        println(numberSet) // 1,2,3 -> 중복을 허용하지 않는다.
+        numberSet.forEach{it
+            println(it)
+        }
+
+        val numberSet1 = mutableSetOf<Int>(1,2,3)
+
+
+        << Imutable 변경불가능 >>
+        // Map -> Key, Value 방식으로 관리한다.
+        val numberMap = mapOf<String, Int>("one" to 1, "two" to 2)
+
+        val numberMap1 = mutableMapOf<Int>("one" to 1, "two" to 2)
+        numberMap1.put("three", 3)
+
+
+    }
 </code>
 </pre>
