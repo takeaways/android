@@ -579,5 +579,73 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    val value: Int = when(value ){
+        1 -> 10
+        2 -> 20
+        3 -> 30
+        else -> 100
+    }
+
+    val value2 : Boolean? = null
+
+    when(value2){
+        true ->{
+            println(true)
+        }
+        false ->{
+            println(false)
+        }
+        nukk ->{
+            println("null!!!!")
+        }
+    }
+
+    val value4 : Int = 10 
+    when(value){
+        is Int -> { // 자료형을 물어 보는 연산
+            println("int")
+        }
+        else -> {
+
+        }
+    }
+
+    in 60 ..[or until] 80 = 60이상 80 미만
+    
+</code>
+</pre>
+
+### 배열
+
+1. 배열이 필요한 이유?
+   - 어떠한 그룹이 필요할 때
+
+<pre>
+<code>
+    fun main(array: Array<String>){
+        val one : Int = 1
+        val two : Int = 2
+        val three : Int = 3
+
+        //1 번째 방법 = 선언과 초기화를 같이
+        var group1 = arrayOf<Int>(1,2,3,4,5)
+        println(group1 is Array)
+ 
+
+        group1.get(index) 
+        group1[index]
+
+        group1.set(index, value)
+        group1[index] = value
+
+    }
+    
+    val a1 = intArraOf(1,2,3,12,3);
+
+    val aInt = intArrayOf(1,2,3,1)
+    val aChar = charArrayOf('a','b')
+    val aDouble = doubleArrayOf(2.3, 123.23,424.42)
+
+
 </code>
 </pre>
