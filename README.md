@@ -550,3 +550,34 @@ class MainActivity : AppCompatActivity() {
 
 1. src : 보여줄 이미지를 지정하는 속성
 2. srcCompat : svg, 등 벡터 방식 이미지 사용시
+3. 안드로이드에서 이미지를 넣는 폴더는 drawable 폴더이다.
+4. 안드로이드 버전이 변경되면서
+5. 안드로이드 버전이 변경되면서 mipmap 이라는 폴더를 제고하는데 이 폴더의 이미지는 비트맵이 아닌 벡터 방식으로 저장
+
+# 코들린 문법
+
+### 제어문
+
+1. when
+
+<pre>
+<code>
+    fun main(args: Arrays<String>){
+        var value : Int = 3
+
+        when(value){
+            1 -> {
+                println("Hello 1")
+            }
+            2 -> {
+                println("Hello 2")
+            }
+            3 -> {
+                println("Hello 3")
+            }
+            else -> println("Hello else")
+        }
+    }
+
+</code>
+</pre>
