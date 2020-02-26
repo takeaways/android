@@ -851,3 +851,120 @@ fun main(args: Array<String>) {
 
         </code>
         </pre>
+
+6. 메소드 : 실제로 동작하는 영역
+
+   <pre>
+   <code>
+   
+       class Runable(var engine: String, var body: String){
+   
+            init{
+                println("무조건 가장 먼저 출력되는 부분입니다. 객체가 만들어 질떄")
+            }
+            fun ride(){
+                println("ride >> $engine")
+            }
+   
+            fun drive(){
+                println("drive >> $body")
+            }
+   
+            fun navi(destination : String){
+                println("goto $destination")
+            }
+   
+        }
+   
+   </code>
+   </pre>
+
+7. 오버로딩 : 함수가 같아도 매개 변수가 다르다면 다른 기능을 동작할 수 있게 하는 방법
+
+   <pre>
+   <code>
+   
+       class TestClass(){
+           fun text(a:Int){
+               println("a");
+           }
+   
+           fun test(var a:Int, var b:String){
+               println("a b");
+           }
+       }
+   
+   </code>
+   </pre>
+
+8. 클래스 활용해보기
+
+   <pre>
+   <code>
+   
+       fun main(arge: Array<String>): Unit{
+   
+           val case : Operator = Operator(10,3)
+           println(case.plus())
+           println(case.minus())
+           println(case.mult())
+           println(case.div())
+   
+           val account : Account = Account("gi","920105");
+           account.makeAccount()
+           account.showMyBalance()
+           account.saveMoney(1000000000)
+           account.showMyBalance()
+           val getMoney = account.withdraw(5000)
+           println("getMoney $getMoney")
+           account.showMyBalance()
+
+
+        }
+
+        class Operator(var number1: Int, var number2: Int){
+            fun plus(): Int{
+                return number1 + number2
+            }
+
+            fun minus(): Int{
+                return number1 - number2
+            }
+
+            fun mult():Int{
+                return number1 * number2
+            }
+
+            fun div():Double{
+                return number1.toDouble() / number2
+            }
+        }
+        class Account(val name: String, val birth: String){
+
+            private var balance : Long = 0
+
+            fun makeAccount(){
+                println("Your Account was Made $name - $birth")
+            }
+            fun showMyBalance(){
+                println("your balance is $balance")
+            }
+            fun saveMoney(money:Int){
+                this.balance += money
+                println("your money was saving, you have ${this.balance} left")
+            }
+            fun withdraw(money: Int): Int?{
+                var leftMoney = this.balance - money
+                if(leftMoney >= 0) {
+                    this.balance -= money
+                    return money
+                } else {
+                    println("잔액이 부족합니다. ${this.balance}")
+                    return null
+                }
+            }
+
+
+        }
+    </code>
+    </pre>
