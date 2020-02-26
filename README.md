@@ -674,7 +674,7 @@ class MainActivity : AppCompatActivity() {
 
 
         << Imutable 변경불가능 >>
-        // Set 
+        // Set : 중복을 허용하지 않으며, 수선가 없다.
         val numberSet = setOf<Int>(1,2,3,1,3,)
         println(numberSet) // 1,2,3 -> 중복을 허용하지 않는다.
         numberSet.forEach{it
@@ -695,3 +695,159 @@ class MainActivity : AppCompatActivity() {
     }
 </code>
 </pre>
+
+<pre>
+<code>
+package Kotlin
+
+fun main(args: Array<String>) {
+    val aList = mutableListOf<Int>(1, 2, 3)
+    println(aList)
+    aList.add(10)
+    println(aList)
+    aList.set(1, 100000)
+    println(aList)
+    aList.removeAt(1)
+    println(aList)
+
+
+    val bSet = mutableSetOf<Int>(1, 2, 3, 14, 4, 4, 4, 4, 4, 4, 4)
+    println()
+    println(bSet)
+    bSet.add(100)
+    println(bSet)
+    bSet.remove(100)
+    println(bSet)
+
+    println()
+    val cMap = mutableMapOf < String, String>("one" to "일", "two" to "이")
+    cMap.put("three", "삼")
+    println(cMap)
+    cMap.replace("three", "사")
+    println(cMap)
+
+    println(cMap.keys)
+    println(cMap.values)
+
+}
+</code>
+</pre>
+
+### 반복문
+
+<pre>
+<code>
+    fun main(arr: Array<String>){
+        val a = mutableListOf<Int>(1,2,3,4,5,6,7,8,9,10)
+
+        for(item in a){
+            println(item)
+        }
+
+        
+    }
+</code>
+</pre>
+
+# 클래스
+
+### oop -> Object Oriented Programming (객체지향 프로그래밍)
+
+1. 객체란?
+
+   - 이름이 있는 모든것
+
+2. 절차지향 프로그래밍 이란?
+
+   - 코드를 위에서 부터 아래로 실행을 하면서 문제가 해결된다.
+
+3) 객체지향 프로그래밍 문제를 해결하는 방법
+   - 객체를 만들어서, 객체에게 일을 시켜서 문제를 해결한다.
+   - 선수, 심판, 경기장, 관중 -> 축구 게임
+
+4. 객체를 만드는 방법
+
+   - 설명서가 있어야 한다.
+
+5. 클래스(설명서) 만드는 방법(1)
+
+   - 1 번
+
+        <pre>
+        <code>
+        
+            class Car(var engine: String, var body: String){
+                
+            }
+     
+            //인스턴스 선언
+            val bigCar = Car("v8", "big")
+     
+        </code>
+        </pre>
+
+   - 2 번
+
+        <pre>
+        <code>
+        
+            class SuperCar {
+                var engine: String
+                var body : String
+                var door : String
+     
+                cosntructor(engine:String, body: String, door: String){
+                    this.engine = engine
+                    this.body = body
+                    this.door = door
+                }
+            }
+     
+        </code>
+        </pre>
+
+   - 3 번 있어도되고 재료가 없어도 될 경우 만드는 방법 (1 번 방법의 확장)
+
+        <pre>
+        <code>
+            //반드시 필요한 부품만 매개변수에 적어준다.
+            class Car1Extends(engine: String , body: String){
+                //추가적으로 필요한 부품을 여기다 적는다.
+                var door : String = "" // 기본값을 넣어 주기
+                                        //꼭 필요한 값을 여기다 정의 해준다. (this)
+                constructor(engine: String , body: String, door: String) : this(egine, body){
+                    this.door = door
+                }
+     
+            }
+
+
+        </code>
+        </pre>
+
+    -   4 번 (2 번 방법의 확장)
+
+        <pre>
+        <code>
+
+            class Car2Extends{
+                var engine: String = ""
+                var body: String = ""
+                var door : String = ""
+
+                //꼭 필요한 부품
+                consructor(engine: String, body: String){
+                    this.engine = engine
+                    this.body = body
+                }
+
+                constructor(egine: String , body: String, door :String ){
+                    this.engine = engine
+                    this.body = body
+                    this.door = door
+                }
+
+            }
+
+        </code>
+        </pre>
