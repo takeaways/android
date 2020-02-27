@@ -968,3 +968,52 @@ fun main(args: Array<String>) {
         }
     </code>
     </pre>
+
+### 17 옵저버 패턴
+
+1. 이벤트를 발생할 때마다 반응할 수 있도록 하는 패턴
+2. 이벤트를 수신 < -- listener(interface) -- > 이벤트의 발생 및 전달
+
+<pre>
+<code>
+    interface EventListener{
+        fun onEnvent(count: Int)
+    }
+
+    class Counter(var listener: EvertListener){
+        fun count(){
+            for(i in 1..100){
+                if(i %  5 == 0 ){
+                    listener.onEvent(i)
+                }
+            }
+        }
+    }
+
+    //1번 방법
+    class EventPrinter : EventListner{
+        fun onEvent(count: Int){
+            println("$count")
+        }
+        fun start(){
+            val counter = Counter(this)
+            counter.count()
+        }
+    }
+
+    //2번 방법
+    class EventPrinter{
+        fun start(){
+            val counter = Counter(object: EventListener{
+                override fun onEvent(count: Int ){
+                    println(${count})
+                }
+            })
+        }
+    }
+
+    fun main(){
+        EventPrinter().start()
+    }
+</code>
+</pre>
