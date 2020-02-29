@@ -1052,11 +1052,72 @@ class Invoce { /*...*/}
                 println("First Initializer block that prints ${name}")
             }
 
+    ```
 
+    ```code 1
+    package Kotiln
+
+    class Person(val name: String, val age: Int, level: String = "basic"){
+
+        private var level = "basic"
+
+        init{
+            when(level){
+                "basic" -> println("Your level is basic")
+                "vip" -> {
+                    this.level = "vip"
+                    println("Your level is vip")
+                }
+                "vvip" -> {
+                    this.level = "vvip"
+                    println("Your level is vvip")
+                }
+                else -> {
+                    println("you are level is not basic")
+                }
+            }
+        }
+
+        fun showName(): String{
+            println("Your name is $name")
+            return name
+        }
+
+        fun showAge():Int{
+            println("Your age is $age")
+            return age
+        }
+
+        fun showLevel(){
+            println("Your current level is ${this.level}")
+        }
+
+        fun setLevel(newLevel : String){
+            when(newLevel){
+                "basic" -> {}
+                "vip" -> {}
+                "vvip" -> {}
+                else -> {}
+            }
+            this.level = newLevel
+        }
+        fun getLevel():String{
+            return this.level
+        }
+    }
     ```
 
 
-        }
+    fun main(args: Array<String>) {
+
+        val gi = Person("GI", 29 , "vvip")
+        println("name : " + gi.name)
+        println("age : " + gi.age)
+        println("level : " + gi.getLevel())
+        gi.showLevel()
+        gi.setLevel("")
+        println()
 
 
+    }
     ```
