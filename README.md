@@ -1017,3 +1017,46 @@ fun main(args: Array<String>) {
     }
 </code>
 </pre>
+
+# Kotlin Class
+
+1. how to make classes using kotiln language
+
+```bash
+class Invoce { /*...*/}
+```
+
+2. two way using constructor in Kotiln
+
+- primary constructor
+
+  - The primary constructor is part of the class header
+    ```code
+    class Person constructor ( firstName : String ) {/*...*/}
+    ```
+  - If the primary constructor does not have any annotations or visibility modifiers, the constructor keyword can be omitted[...]
+
+    ```code
+    class Person ( firstName : String ) {/*...*/}
+    ```
+
+  - The primary constructor cannot contain any code. Initialization ccode can be placed in intializer blocks,
+    which are prefixed with the <b>init</b> keyword
+
+    ```code
+        class InitOrderDemo(name : String){
+
+            val firstProperty = "First Property : $name".also(::println)
+
+            init {
+                println("First Initializer block that prints ${name}")
+            }
+
+
+    ```
+
+
+        }
+
+
+    ```
