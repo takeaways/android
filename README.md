@@ -1043,49 +1043,37 @@ class Invoce { /*...*/}
   - The primary constructor cannot contain any code. Initialization ccode can be placed in intializer blocks,
     which are prefixed with the <b>init</b> keyword
 
-    ```code
-        class InitOrderDemo(name : String){
-
-            val firstProperty = "First Property : $name".also(::println)
-
-            init {
-                println("First Initializer block that prints ${name}")
-            }
-
-    ```
 
     ```code 1
     package Kotiln
 
-    class Person(val name: String, val age: Int, level: String = "basic"){
+    open class Person(private val name: String, private var age: Int, level: String = "basic"){
 
         private var level = "basic"
 
         init{
             when(level){
-                "basic" -> println("Your level is basic")
+                "basic" -> println("Init : Your level is basic")
                 "vip" -> {
                     this.level = "vip"
-                    println("Your level is vip")
+                    println("Init : Your level is vip")
                 }
                 "vvip" -> {
                     this.level = "vvip"
-                    println("Your level is vvip")
+                    println("Init : Your level is vvip")
                 }
                 else -> {
-                    println("you are level is not basic")
+                    println("Init : you are level is not basic")
                 }
             }
         }
 
-        fun showName(): String{
+        fun showName(){
             println("Your name is $name")
-            return name
         }
 
-        fun showAge():Int{
+        fun showAge(){
             println("Your age is $age")
-            return age
         }
 
         fun showLevel(){
@@ -1093,31 +1081,45 @@ class Invoce { /*...*/}
         }
 
         fun setLevel(newLevel : String){
-            when(newLevel){
-                "basic" -> {}
-                "vip" -> {}
-                "vvip" -> {}
-                else -> {}
+            if(newLevel !== this.level){
+                when(newLevel){
+                    "basic", "vip", "vvip" -> {
+                        println("Your level has been changed to $newLevel")
+                        this.level = newLevel
+                    }
+                    else -> {
+                        println("Your level will be unchanged 1 ")
+                    }
+                }
+
+            }else{
+                println("Your level will be unchanged 2 ")
+                this.level = newLevel
             }
-            this.level = newLevel
         }
+
         fun getLevel():String{
             return this.level
         }
     }
-    ```
 
+    class SuperUser():Person(name, age){
+
+    }
 
     fun main(args: Array<String>) {
 
         val gi = Person("GI", 29 , "vvip")
-        println("name : " + gi.name)
-        println("age : " + gi.age)
-        println("level : " + gi.getLevel())
+        gi.showName()
+        gi.showAge()
         gi.showLevel()
-        gi.setLevel("")
-        println()
 
+        println("1 level --> ${gi.getLevel()}")
+        gi.setLevel("vip")
+        println("2 level --> ${gi.getLevel()}")
+        println("------- ")
+
+        gi.showLevel()
 
     }
     ```
