@@ -918,9 +918,8 @@ fun main(args: Array<String>) {
            val getMoney = account.withdraw(5000)
            println("getMoney $getMoney")
            account.showMyBalance()
-
-
         }
+
 
         class Operator(var number1: Int, var number2: Int){
             fun plus(): Int{
@@ -939,6 +938,7 @@ fun main(args: Array<String>) {
                 return number1.toDouble() / number2
             }
         }
+
         class Account(val name: String, val birth: String){
 
             private var balance : Long = 0
@@ -963,8 +963,6 @@ fun main(args: Array<String>) {
                     return null
                 }
             }
-
-
         }
     </code>
     </pre>
